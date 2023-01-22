@@ -21,6 +21,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { MenuItemComponent } from './components/menu-item/menu-item.component';
 import { BooksComponent } from './components/books/books.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { BookItemComponent } from './components/book-item/book-item.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     HeaderComponent,
     MenuItemComponent,
     BooksComponent,
-    DashboardComponent
+    DashboardComponent,
+    BookItemComponent
   ],
   imports: [
     BrowserModule,

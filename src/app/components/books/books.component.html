@@ -1,1 +1,40 @@
-<p>books works!</p>
+<app-header></app-header>
+<div
+  class="mx-auto grid gap-4 grid-cols-1 min-[340px]:grid-cols-2 min-[800px]:grid-cols-3 min-[1000px]:grid-cols-4 max-w-[1200px]"
+>
+  <mat-card class="my-5">
+    <a class="h-full items-center p-2">
+      <div
+        class="flex flex-col items-center justify-center border border-solid rounded-sm w-full h-full"
+      >
+        <img
+          src="../../../assets/images/add-file.svg"
+          class="max-h-28"
+          routerLink="/books"
+        />
+        <div class="my-1 text-lg"><strong>Add Book</strong></div>
+      </div></a
+    >
+  </mat-card>
+  <app-book-item
+    [author]="'ABC'"
+    [issueStatus]="'Available'"
+    [description]="
+      'Some random description about the book. Some random description about the book. Some random description about the book. Some random description about the book.'
+    "
+  ></app-book-item>
+  <app-book-item
+    [author]="'Xyz'"
+    [issueStatus]="'Available'"
+    [description]="
+      'Some random description about the book. Some random description about the book. Some random description about the book. Some random description about the book.'
+    "
+  ></app-book-item>
+  <app-book-item
+    [author]="'Howard'"
+    [issueStatus]="'Issued'"
+    [description]="
+      'Some random description about the book. Some random description about the book. Some random description about the book. Some random description about the book.'
+    "
+  ></app-book-item>
+</div>
