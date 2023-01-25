@@ -1,17 +1,17 @@
 <mat-toolbar>
   <div class="flex justify-between w-full max-w-[1200px] mx-auto">
-    <div class="flex max-h-9 items-end justify-start">
-      <img
-        src="../../../assets/images/logo.svg"
-        alt="freshbooks_logo"
-        class="max-h-9"
-      />
-      <a
-        routerLink="/"
-        class="hidden min-[360px]:flex font-bold ml-3 mb-[-5px] text-2xl"
-        >FreshBooks</a
-      >
-    </div>
+    <a routerLink="/">
+      <div class="flex max-h-9 items-end justify-start">
+        <img
+          src="../../../assets/images/logo.svg"
+          alt="freshbooks_logo"
+          class="max-h-9"
+        />
+        <span class="hidden min-[360px]:flex font-bold ml-3 mb-[-5px] text-2xl"
+          >FreshBooks</span
+        >
+      </div></a
+    >
     <button mat-stroked-button color="warn">Log Out</button>
   </div>
 </mat-toolbar>
