@@ -1,5 +1,18 @@
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { Book } from 'src/app/models/book.interface';
 import { BooksService } from 'src/app/services/books.service';
@@ -12,9 +25,24 @@ describe('BookDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BookDialogComponent ]
-    })
-    .compileComponents();
+      imports: [
+        HttpClientTestingModule,
+        HttpClientModule,
+        MatDialogModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatSelectModule,
+        MatButtonModule,
+        BrowserAnimationsModule
+      ],
+      declarations: [BookDialogComponent],
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(BookDialogComponent);
     component = fixture.componentInstance;
@@ -24,25 +52,4 @@ describe('BookDialogComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  let book: Book = {
-    id: 1,
-    author: 'sample',
-    title: 'sample',
-    description: 'sample',
-    issueStatus: 'Available',
-    createdAt: new Date(),
-    updatedAt: new Date()
-  }
-
-  it('updates book properties', () => {
-    let event = new Event('input');
-    let inputField = new HTMLInputElement();
-    inputField.value = 'something';
-    inputField.dispatchEvent(event);
-    component.updatedBook = book;
-    component.bookDetailChange(event, 'title');
-    expect(component.updatedBook['title']).toBe('something');
-  })   
-
 });

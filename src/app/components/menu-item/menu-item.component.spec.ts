@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardModule } from '@angular/material/card';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { MenuItemComponent } from './menu-item.component';
 
@@ -8,9 +10,9 @@ describe('MenuItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MenuItemComponent ]
-    })
-    .compileComponents();
+      imports: [MatCardModule, RouterTestingModule],
+      declarations: [MenuItemComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MenuItemComponent);
     component = fixture.componentInstance;

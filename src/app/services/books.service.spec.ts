@@ -14,7 +14,6 @@ describe('BooksService', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
-        HttpTestingController,
         HttpClientModule,
       ],
       providers: [BooksService],

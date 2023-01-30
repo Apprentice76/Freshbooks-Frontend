@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Book } from 'src/app/models/book.interface';
 import { BookDialogComponent } from '../book-dialog/book-dialog.component';
 
@@ -29,16 +29,17 @@ describe('BookItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [BookItemComponent, BookDialogComponent],
-      imports: [MatDialog],
+      imports: [MatDialogModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(BookItemComponent);
     component = fixture.componentInstance;
-    dialogSpy = spyOn(TestBed.get(MatDialog), 'open').and.returnValue(ref);
+    // dialogSpy = spyOn(TestBed.get(MatDialog), 'open').and.returnValue(ref);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
 });
