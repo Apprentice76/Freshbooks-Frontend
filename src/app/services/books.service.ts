@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Book } from '../models/book.interface';
-import { Observable, map } from 'rxjs';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BooksService {
+  BACKEND_URI = 'http://localhost:4000';
+
   constructor(private http: HttpClient) {}
 
-  getAllBooks(): Observable<Book[]> {
+  getAllBooks() {
     return this.http
-      .get<{ [key: string]: Book}>('http://localhost:4000/books')
+      .get<{ [key: string]: Book }>(`${this.BACKEND_URI}/books`)
       .pipe(
         map((res) => {
           const books = [];
@@ -25,21 +27,15 @@ export class BooksService {
       );
   }
 
-  updateBook(book: Book): Observable<void> {
-    console.log('update called')
-    
-    return this.http.put<void>(
-      'http://localhost:4000/update', book
-    );
+  updateBook(book: Book) {
+    return this.http.put(`${this.BACKEND_URI}/update`, book);
   }
 
   addBook(book: Book) {
-
+    return this.http.post(`${this.BACKEND_URI}/add-book`, book);
   }
 
-  deleteBook(book: Book) {
-
+  deleteBook(id: number) {
+    return this.http.delete(`${this.BACKEND_URI}/remove-book/${id}`);
   }
-
-
 }

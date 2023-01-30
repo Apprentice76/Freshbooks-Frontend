@@ -12,6 +12,6 @@
         >
       </div></a
     >
-    <button mat-stroked-button color="warn">Log Out</button>
+    <button mat-stroked-button color="warn" *ngIf="loggedIn" (click)="logOut()">Log Out</button>
   </div>
 </mat-toolbar>

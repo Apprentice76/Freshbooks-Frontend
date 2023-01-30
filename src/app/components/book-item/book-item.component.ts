@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BookDialogComponent } from '../book-dialog/book-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Book } from 'src/app/models/book.interface';
@@ -14,7 +8,7 @@ import { Book } from 'src/app/models/book.interface';
   templateUrl: './book-item.component.html',
   styleUrls: ['./book-item.component.scss'],
 })
-export class BookItemComponent implements OnInit, OnChanges {
+export class BookItemComponent implements OnInit {
   @Input() book: Book | undefined;
 
   @Input() title: string = '';
@@ -31,14 +25,11 @@ export class BookItemComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('change!', changes);
-  }
-
   constructor(private bookDialog: MatDialog) {}
 
   shortenDescription(description: string): string {
     let maxLength = 50;
+    if (!description) return '';
     return description.length > maxLength
       ? description.slice(0, maxLength - 1) + '...'
       : description;
@@ -52,13 +43,12 @@ export class BookItemComponent implements OnInit, OnChanges {
       disableClose: true,
     });
 
-    const dialogSub = dialogRef.afterClosed().subscribe((updatedBook: Book) => {
-      if (updatedBook) {
-        this.book = updatedBook;
+    dialogRef
+      .afterClosed()
+      .subscribe((response: Book | undefined | 'close') => {
+        if (response === 'close') return;
+        this.book = response;
         this.ngOnInit();
-      }
-    });
-
-    // setTimeout(() => dialogSub.unsubscribe(), 2000);
+      });
   }
 }

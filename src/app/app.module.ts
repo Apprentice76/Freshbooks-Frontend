@@ -29,6 +29,9 @@ import { BooksComponent } from './components/books/books.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BookItemComponent } from './components/book-item/book-item.component';
 import { BookDialogComponent } from './components/book-dialog/book-dialog.component';
+import { LoginComponent } from './components/login/login.component';
+import { IssuedBooksComponent } from './components/issued-books/issued-books.component';
+import { ReturnedBooksComponent } from './components/returned-books/returned-books.component';
 
 
 @NgModule({
@@ -40,6 +43,9 @@ import { BookDialogComponent } from './components/book-dialog/book-dialog.compon
     DashboardComponent,
     BookItemComponent,
     BookDialogComponent,
+    LoginComponent,
+    IssuedBooksComponent,
+    ReturnedBooksComponent,
   ],
   imports: [
     BrowserModule,

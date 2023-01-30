@@ -21,7 +21,7 @@
               matInput
               placeholder="Title"
               type="text"
-              [value]="updatedBook.title"
+              [value]="updatedBook?.title || ''"
               (input)="bookDetailChange($event, 'title')"
             />
           </mat-form-field>
@@ -31,7 +31,7 @@
               matInput
               placeholder="Author"
               type="text"
-              [value]="updatedBook.author"
+              [value]="updatedBook?.author || ''"
               (input)="bookDetailChange($event, 'author')"
             />
           </mat-form-field>
@@ -69,16 +69,26 @@
           </div>
         </div>
       </div>
-      <mat-form-field class="w-full">
-        <mat-label>Description</mat-label>
-        <textarea
-          matInput
-          placeholder="Description..."
-          style="resize: none"
-          [value]="updatedBook.description"
-          (input)="bookDetailChange($event, 'description')"
-        ></textarea>
-      </mat-form-field>
+      <div class="flex items-baseline">
+        <mat-form-field class="w-full">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            placeholder="Description..."
+            style="resize: none"
+            [value]="updatedBook.description || ''"
+            (input)="bookDetailChange($event, 'description')"
+          ></textarea>
+        </mat-form-field>
+        <button
+          mat-fab
+          color="warn"
+          class="ml-3"
+          (click)="deleteBook()"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
     </div>
   </mat-dialog-content>
 </div>

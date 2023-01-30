@@ -10,17 +10,21 @@ import { Book } from '../../models/book.interface';
   styleUrls: ['./book-dialog.component.scss'],
 })
 export class BookDialogComponent {
-  updatedBook: any;
+  updatedBook: any = {};
   noChanges = true;
   status: string = '';
+  data: Object = {};
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public book: Book,
     private booksService: BooksService,
-    private dialogRef: MatDialogRef<BookDialogComponent>
+    public dialogRef: MatDialogRef<BookDialogComponent>
   ) {
-    this.updatedBook = this.book;
-    this.status = this.updatedBook.issueStatus;
+    if (this.book) {
+      this.updatedBook = this.book;
+      this.status = this.updatedBook.issueStatus;
+      return;
+    }
   }
 
   bookDetailChange(event: Event, key: keyof Book) {
@@ -30,7 +34,6 @@ export class BookDialogComponent {
         (event.target as HTMLInputElement) ||
         (event.target as HTMLTextAreaElement)
       ).value;
-    console.log(this.updatedBook);
   }
 
   issueStatusChange(event: MatSelectChange) {
@@ -46,14 +49,21 @@ export class BookDialogComponent {
         this.status = 'Return';
         break;
     }
-    console.log('Call!', 'value:', this.status);
   }
 
-  closeDialog(res?: Book) {
-    this.dialogRef.close(res);
+  closeDialog() {
+    this.dialogRef.close('close');
   }
 
   saveBookChanges() {
+    // adding new book
+    if (!this.book) {
+      this.booksService.addBook(this.updatedBook).subscribe((res) => {
+        this.dialogRef.close(res as Book);
+      });
+      return;
+    }
+
     switch (this.status) {
       case 'Issue':
         this.updatedBook.issueStatus = 'Unavailable';
@@ -63,12 +73,15 @@ export class BookDialogComponent {
         break;
     }
 
-    if (this.noChanges) {
-      this.dialogRef.close();
-      return;
-    }
+    // updating book
     this.booksService.updateBook(this.updatedBook).subscribe(() => {
-      this.closeDialog(this.updatedBook);
+      this.dialogRef.close(this.updatedBook);
+    });
+  }
+
+  deleteBook() {
+    this.booksService.deleteBook(this.book.id).subscribe(() => {
+      this.dialogRef.close();
     });
   }
 }
