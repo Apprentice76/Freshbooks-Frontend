@@ -13,6 +13,10 @@ export class ReturnedBooksComponent implements OnInit {
   constructor(private returnService: ReturnService) {}
 
   ngOnInit() {
+    this.getReturnHistory();
+  }
+
+  getReturnHistory() {
     this.returnService.getReturnHistory().subscribe((returnHistory: any) => {
       for (let row of returnHistory) {
         row['returnDate'] = this.returnService.prettifyDate(row['returnDate']);

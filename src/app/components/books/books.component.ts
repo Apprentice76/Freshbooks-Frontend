@@ -36,10 +36,11 @@ export class BooksComponent implements OnInit {
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe((updatedBook: Book) => {
-      if (updatedBook) {
+    dialogRef
+      .afterClosed()
+      .subscribe((updatedBook: Book | undefined | 'close') => {
+        if (!updatedBook || updatedBook === 'close') return;
         this.books.push(updatedBook);
-      }
-    });
+      });
   }
 }

@@ -28,6 +28,7 @@
           <mat-form-field class="w-full">
             <mat-label>Author</mat-label>
             <input
+              id="author"
               matInput
               placeholder="Author"
               type="text"
@@ -80,12 +81,7 @@
             (input)="bookDetailChange($event, 'description')"
           ></textarea>
         </mat-form-field>
-        <button
-          mat-fab
-          color="warn"
-          class="ml-3"
-          (click)="deleteBook()"
-        >
+        <button mat-fab color="warn" class="ml-3" (click)="deleteBook()">
           <mat-icon>delete</mat-icon>
         </button>
       </div>

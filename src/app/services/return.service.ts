@@ -10,6 +10,7 @@ export class ReturnService {
   constructor(private http: HttpClient) {}
 
   prettifyDate(dateString: string): string {
+    if (!dateString) return '';
     const months: string[] = [
       'Jan',
       'Feb',

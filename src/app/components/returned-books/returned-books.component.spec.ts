@@ -1,4 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import {
   HttpClientTestingModule,
   HttpTestingController,
@@ -11,6 +16,7 @@ import { HeaderComponent } from '../header/header.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { of } from 'rxjs';
 
 describe('ReturnedBooksComponent', () => {
   let component: ReturnedBooksComponent;
@@ -31,10 +37,19 @@ describe('ReturnedBooksComponent', () => {
 
     fixture = TestBed.createComponent(ReturnedBooksComponent);
     component = fixture.componentInstance;
+    service = TestBed.inject(ReturnService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call getReturnHistory', () => {
+    const spy = spyOn(service, 'getReturnHistory').and.callFake(() => {
+      return of([{ issueDate: '2023-01-31T08:36:10.481Z' }]);
+    });
+    component.getReturnHistory();
+    expect(spy).toHaveBeenCalledTimes(1);
   });
 });
