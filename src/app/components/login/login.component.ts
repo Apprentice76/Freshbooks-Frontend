@@ -18,10 +18,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  logIn() {
-    if (this.email === 'admin@abc.com' && this.password === 'password')
+  logIn(): boolean {
+    if (this.email === 'admin@abc.com' && this.password === 'password') {
       localStorage.setItem('user', 'admin');
-    this.router.navigate(['/']);
+      this.router.navigate(['/']);
+      return true;
+    }
+    return false;
   }
 
   inputHandler(event: Event, field: string) {

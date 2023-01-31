@@ -49,7 +49,7 @@ describe('ReturnedBooksComponent', () => {
     const spy = spyOn(service, 'getReturnHistory').and.callFake(() => {
       return of([{ issueDate: '2023-01-31T08:36:10.481Z' }]);
     });
-    component.getReturnHistory();
+    component.ngOnInit();
     expect(spy).toHaveBeenCalledTimes(1);
   });
 });
